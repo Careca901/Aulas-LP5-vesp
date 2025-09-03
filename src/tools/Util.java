@@ -8,6 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -33,7 +34,7 @@ public class Util {
             } else if (comp instanceof JCheckBox checkBox) {
                 checkBox.setSelected(false);
             } else if (comp instanceof JComboBox comboBox) {
-                comboBox.setSelectedIndex(0);
+                comboBox.setSelectedIndex(-1);
             } else if (comp instanceof JFormattedTextField formattedTextField) {
                 formattedTextField.setText("");
             } else if (comp instanceof JPasswordField passwordField) {
@@ -41,5 +42,14 @@ public class Util {
             }
         }
 
+    }
+    
+    public static void mensagem(String cad) {
+        JOptionPane.showMessageDialog(null, cad);
+        
+    }
+    public static boolean pergunta(String cad) {
+        JOptionPane.showConfirmDialog(null, cad);
+        return true;
     }
 }

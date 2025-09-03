@@ -269,7 +269,7 @@ Util.habilitar(false, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-
+Util.pergunta("tem certeza?");
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
 
