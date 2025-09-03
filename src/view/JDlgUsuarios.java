@@ -22,7 +22,9 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir);
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
+                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
+                jChbAtivo,jPwfSenha);
 
     }
     
@@ -37,6 +39,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jTxtCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -59,6 +62,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jBtnConfirmar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
         jBtnPesquisar = new javax.swing.JButton();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -247,13 +252,19 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-
+Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
+                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
+                jChbAtivo,jPwfSenha);
+Util.habilitar(false, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
 
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-
+Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
+                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
+                jChbAtivo,jPwfSenha);
+Util.habilitar(false, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -266,7 +277,10 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         // TODO add your handling code here:
  
 
-
+Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
+                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
+                jChbAtivo,jPwfSenha);
+Util.habilitar(true, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -277,7 +291,10 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-
+Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
+                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
+                jChbAtivo,jPwfSenha);
+Util.habilitar(true, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jTxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoFocusLost
@@ -343,6 +360,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JComboBox<String> jCboNivel;
     private javax.swing.JCheckBox jChbAtivo;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JFormattedTextField jFmtCpf;
     private javax.swing.JFormattedTextField jFmtDataDeNascimento;
     private javax.swing.JLabel jLabel1;
