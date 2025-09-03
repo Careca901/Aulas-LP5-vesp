@@ -4,6 +4,7 @@
  */
 package tools;
 
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
@@ -12,17 +13,24 @@ import javax.swing.JTextField;
  * @author u1845853
  */
 public class Util {
-    public static void habilitar(boolean valor, JComponent ... componentes) {
+
+    public static void habilitar(boolean valor, JComponent... componentes) {
         for (int i = 0; i < componentes.length; i++) {
             componentes[i].setEnabled(valor);
-            
+
         }
     }
-     public static void limpar( JComponent ... componentes) {
-         for (int i = 0; i < componentes.length; i++) {
-             //intanceof
-                         ((JTextField)componentes[i]).setText("");             
-         }
-     }
-    
+
+    public static void limpar(JComponent... componentes) {
+        for (int i = 0; i < componentes.length; i++) {
+            JComponent comp = componentes[i];
+            //intanceof
+            if (comp instanceof JTextField) {
+                ((JTextField) comp).setText("");
+            } else if (comp instanceof JCheckBox jCheckBox) {
+                jCheckBox.setSelected(false);
+            }
+        }
+    }
+
 }

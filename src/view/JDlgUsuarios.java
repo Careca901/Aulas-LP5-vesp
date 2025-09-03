@@ -294,6 +294,11 @@ Util.habilitar(true, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
 Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
                 jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
                 jChbAtivo,jPwfSenha);
+ // Limpar JTextField
+Util.limpar( jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
+                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
+                jChbAtivo,jPwfSenha);
+ // Habilitar os botoes
 Util.habilitar(true, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
