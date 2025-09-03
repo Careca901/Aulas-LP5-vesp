@@ -5,7 +5,10 @@
 package tools;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -25,12 +28,18 @@ public class Util {
         for (int i = 0; i < componentes.length; i++) {
             JComponent comp = componentes[i];
             //intanceof
-            if (comp instanceof JTextField) {
-                ((JTextField) comp).setText("");
-            } else if (comp instanceof JCheckBox jCheckBox) {
-                jCheckBox.setSelected(false);
+            if (comp instanceof JTextField textField) {
+                textField.setText("");
+            } else if (comp instanceof JCheckBox checkBox) {
+                checkBox.setSelected(false);
+            } else if (comp instanceof JComboBox comboBox) {
+                comboBox.setSelectedIndex(0);
+            } else if (comp instanceof JFormattedTextField formattedTextField) {
+                formattedTextField.setText("");
+            } else if (comp instanceof JPasswordField passwordField) {
+                passwordField.setText("");
             }
         }
-    }
 
+    }
 }
