@@ -5,8 +5,11 @@
  */
 package view;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
 import tools.Util;
-
+import static tools.Util.mensagem;
+import static tools.Util.pergunta;
 
 /**
  *
@@ -14,21 +17,16 @@ import tools.Util;
  */
 public class JDlgUsuarios extends javax.swing.JDialog {
 
-
-
-
     public JDlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
-                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
-                jChbAtivo,jPwfSenha);
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                jCboNivel, jBtnCancelar, jBtnConfirmar, jFmtDataDeNascimento,
+                jChbAtivo, jPwfSenha);
 
     }
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,6 +84,12 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jLabel3.setText("Apelido");
 
         jLabel4.setText("CPF");
+
+        jFmtCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFmtCpfActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Data de Nascimento");
 
@@ -218,9 +222,9 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFmtDataDeNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jFmtDataDeNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -252,35 +256,43 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
-                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
-                jChbAtivo,jPwfSenha);
-Util.habilitar(false, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                jCboNivel, jBtnCancelar, jBtnConfirmar, jFmtDataDeNascimento,
+                jChbAtivo, jPwfSenha);
+        Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
 
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
-                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
-                jChbAtivo,jPwfSenha);
-Util.habilitar(false, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                jCboNivel, jBtnCancelar, jBtnConfirmar, jFmtDataDeNascimento,
+                jChbAtivo, jPwfSenha);
+        Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        // TODO add your handling code here:
-Util.pergunta("tem certeza?");
+          // TODO add your handling code here:
+        if (pergunta("Tem certeza que deseja excluir este registro?")) {
+            // Aqui executa a exclusão
+            mensagem("Registro excluído com sucesso!");
+        } else {
+            mensagem("Exclusão cancelada.");
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
- 
+        Date data = Util.strToDate(jFmtDataDeNascimento.getText());
+        String dataFormatada = Util.dateToStr(data);
 
-Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
-                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
-                jChbAtivo,jPwfSenha);
-Util.habilitar(true, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
+        Util.mensagem("Data convertida: " + dataFormatada);
+        Util.mensagem("Usuário salvo com sucesso!");
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                jCboNivel, jBtnCancelar, jBtnConfirmar, jFmtDataDeNascimento,
+                jChbAtivo, jPwfSenha);
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -291,25 +303,52 @@ Util.habilitar(true, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
-                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
-                jChbAtivo,jPwfSenha);
- // Limpar JTextField
-Util.limpar( jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf,
-                jCboNivel, jBtnCancelar,jBtnConfirmar,jFmtDataDeNascimento,
-                jChbAtivo,jPwfSenha);
- // Habilitar os botoes
-Util.habilitar(true, jBtnAlterar,jBtnExcluir,jBtnIncluir,jBtnPesquisar);
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                jCboNivel, jBtnCancelar, jBtnConfirmar, jFmtDataDeNascimento,
+                jChbAtivo, jPwfSenha);
+        // Limpar JTextField
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                jCboNivel, jBtnCancelar, jBtnConfirmar, jFmtDataDeNascimento,
+                jChbAtivo, jPwfSenha);
+        // Habilitar os botoes
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jTxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoFocusLost
         // TODO add your handling code here:
-
+        try {
+            int codigo = Util.strToInt(jTxtCodigo.getText());
+            System.out.println("Código digitado: " + codigo);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Este campo aceita apenas números!",
+                    "Erro de Entrada",
+                    JOptionPane.ERROR_MESSAGE);
+            jTxtCodigo.setText(""); // Apaga o valor inválido
+            jTxtCodigo.requestFocus(); // Volta o foco pro campo
+        }
     }//GEN-LAST:event_jTxtCodigoFocusLost
 
     private void jCboNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboNivelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCboNivelActionPerformed
+
+    private void jFmtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtCpfActionPerformed
+        // TODO add your handling code here:
+        try {
+            int cpf = Util.strToInt(jFmtCpf.getText());
+            System.out.println("CPF digitado: " + cpf);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Este campo aceita apenas números!",
+                    "Erro de Entrada",
+                    JOptionPane.ERROR_MESSAGE);
+            jFmtCpf.setText("");
+            jFmtCpf.requestFocus();
+        }
+        // poderia ficar melhor se eu usasse: 
+        // Util.validarNumero(jTxtCodigo, "O campo Código aceita apenas números!");
+    }//GEN-LAST:event_jFmtCpfActionPerformed
 
     /**
      * @param args the command line arguments

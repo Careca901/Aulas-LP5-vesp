@@ -4,6 +4,8 @@
  */
 package tools;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -46,10 +48,68 @@ public class Util {
     
     public static void mensagem(String cad) {
         JOptionPane.showMessageDialog(null, cad);
-        
+
     }
+
     public static boolean pergunta(String cad) {
-        JOptionPane.showConfirmDialog(null, cad);
-        return true;
+        int resposta = JOptionPane.showConfirmDialog(
+                null,
+                cad,
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+        return resposta == JOptionPane.YES_OPTION;
+
     }
+
+    public static int strToInt(String num) {
+        return Integer.parseInt(num);
+    }
+
+    public static String atrToInt(String num) {
+        return String.valueOf(num);
+    }
+
+    public static double strToDouble(String num) {
+        return 0.0;
+    }
+
+    public static Integer doubleToStr(String num) {
+        try {
+            return Integer.valueOf(num);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Valor inválido: " + num);
+        }
+    }
+
+    public static Date strToDate(String data) {
+        return null;
+    }
+
+    public static String strToStr(Date data) {
+        return "";
+    }
+
+    public static String dateToStr(Date data) {
+        if (data == null) {
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(data);
+    }
+
+    // Perguntar para o titio Marcos se posso fazer um metodo para verificar sé é um numero ou um texto
+    
+//    public static boolean validarNumero(javax.swing.JTextField campo, String msg) {
+//    try {
+//        Integer.parseInt(campo.getText());
+//        return true;
+//    } catch (NumberFormatException e) {
+//        JOptionPane.showMessageDialog(null, msg, "Erro de Entrada", JOptionPane.ERROR_MESSAGE);
+//        campo.setText("");
+//        campo.requestFocus();
+//        return false;
+//    }
+//}
 }
