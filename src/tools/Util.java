@@ -31,16 +31,16 @@ public class Util {
         for (int i = 0; i < componentes.length; i++) {
             JComponent comp = componentes[i];
             //intanceof
-            if (comp instanceof JTextField textField) {
-                textField.setText("");
-            } else if (comp instanceof JCheckBox checkBox) {
-                checkBox.setSelected(false);
-            } else if (comp instanceof JComboBox comboBox) {
-                comboBox.setSelectedIndex(-1);
-            } else if (comp instanceof JFormattedTextField formattedTextField) {
-                formattedTextField.setText("");
-            } else if (comp instanceof JPasswordField passwordField) {
-                passwordField.setText("");
+            if (componentes[i] instanceof JTextField) {
+                ((JTextField) componentes[i]).setText("");
+            } else if (componentes[i] instanceof JCheckBox) {
+                ((JCheckBox) componentes[i]).setSelected(false);
+            } else if (componentes[i] instanceof JComboBox) {
+                ((JComboBox<?>) componentes[i]).setSelectedIndex(-1); // limpa seleção
+            } else if (componentes[i] instanceof JFormattedTextField) {
+                ((JFormattedTextField) componentes[i]).setText("");
+            } else if (componentes[i] instanceof JPasswordField) {
+                ((JPasswordField) componentes[i]).setText("");
             }
         }
 
