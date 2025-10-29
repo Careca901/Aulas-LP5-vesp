@@ -10,11 +10,12 @@ import org.hibernate.SessionFactory;
 
 /**
  *
- * @author u04853004190
+ * @author u1845853
  */
-public abstract class AbstractDao {
+public abstract class AbstractDAO {
     public Session session;
-    public AbstractDao(){
+    
+    public AbstractDAO() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         session = sessionFactory.openSession();
     }
@@ -24,4 +25,5 @@ public abstract class AbstractDao {
     public abstract void delete(Object object);
     public abstract Object list(int codigo);
     public abstract Object listAll();
+
 }

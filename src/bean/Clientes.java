@@ -1,5 +1,5 @@
 package bean;
-// Generated 17/09/2025 17:30:06 by Hibernate Tools 4.3.1
+// Generated 17/09/2025 17:29:19 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -29,9 +29,9 @@ public class Clientes  implements java.io.Serializable {
      private String endereco;
      private String numero;
      private String bairro;
-     private Integer estadocivil;
-     private Integer sexo;
-     private Set pedidoses = new HashSet(0);
+     private int estadocivil;
+     private int sexo;
+
 
     public Clientes() {
     }
@@ -40,7 +40,7 @@ public class Clientes  implements java.io.Serializable {
     public Clientes(int idclientes) {
         this.idclientes = idclientes;
     }
-    public Clientes(int idclientes, String nome, String cpf, String rg, String cep, String endereco, String numero, String bairro, Integer estadocivil, Integer sexo, Set pedidoses) {
+    public Clientes(int idclientes, String nome, String cpf, String rg, String cep, String endereco, String numero, String bairro, int estadocivil, int sexo) {
        this.idclientes = idclientes;
        this.nome = nome;
        this.cpf = cpf;
@@ -51,7 +51,7 @@ public class Clientes  implements java.io.Serializable {
        this.bairro = bairro;
        this.estadocivil = estadocivil;
        this.sexo = sexo;
-       this.pedidoses = pedidoses;
+
     }
    
      @Id 
@@ -138,34 +138,27 @@ public class Clientes  implements java.io.Serializable {
 
     
     @Column(name="estadocivil")
-    public Integer getEstadocivil() {
+    public int getEstadocivil() {
         return this.estadocivil;
     }
     
-    public void setEstadocivil(Integer estadocivil) {
+    public void setEstadocivil(int estadocivil) {
         this.estadocivil = estadocivil;
     }
 
     
     @Column(name="sexo")
-    public Integer getSexo() {
+    public int getSexo() {
         return this.sexo;
     }
     
-    public void setSexo(Integer sexo) {
+    public void setSexo(int sexo) {
         this.sexo = sexo;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="clientes")
-    public Set getPedidoses() {
-        return this.pedidoses;
+    @Override
+    public String toString() {
+        return this.nome;
     }
-    
-    public void setPedidoses(Set pedidoses) {
-        this.pedidoses = pedidoses;
-    }
-
-
 
 
 }

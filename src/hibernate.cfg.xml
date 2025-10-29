@@ -46,13 +46,11 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_marcos_vilhanueva?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">marcos_vilhanueva</property>
     <property name="hibernate.connection.password">marcos_vilhanueva</property>
-    <mapping class="dao.HibernateUtil"/>
-    <mapping class="dao.Pedidos"/>
-    <mapping class="dao.PedidosProdutos"/>
-    <mapping class="dao.Clientes"/>
-    <mapping class="dao.Produtos"/>
-    <mapping class="dao.Vendedor"/>
-    <mapping class="dao.Usuarios"/>
-    <mapping resource="dao/hibernate.hbm.xml"/>
+    <mapping class="bean.PedidosProdutos"/>
+    <mapping class="bean.Usuarios"/>
+    <mapping class="bean.Vendedor"/>
+    <mapping class="bean.Clientes"/>
+    <mapping class="bean.Pedidos"/>
+    <mapping class="bean.Produtos"/>
   </session-factory>
 </hibernate-configuration>
