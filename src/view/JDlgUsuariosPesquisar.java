@@ -5,8 +5,9 @@
 package view;
 
 import bean.Usuarios;
-import dao.UsuariosDAO;
+import dao.UsuariosDao;
 import java.util.List;
+import tools.Util;
 import view.JDlgUsuarios;
 
 /**
@@ -27,8 +28,8 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setTitle("Pesquisar Usuários");
         controllerUsuarios = new ControllerUsuarios();
-        UsuariosDAO usuariosDAO = new UsuariosDAO();
-        List lista = (List) usuariosDAO.listAll();
+        UsuariosDao usuariosDao = new UsuariosDao();
+        List lista = (List) usuariosDao.listAll();
         controllerUsuarios.setList(lista);
         jTable1.setModel(controllerUsuarios);
     }
@@ -105,9 +106,12 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+        if (jTable1.getSelectedRow()== -1){
+            Util.mensagem("Deixa de ser cabeçudo, escolha uma linha e de 2 clicks nela");
         Usuarios usuarios =  controllerUsuarios.getBean( jTable1.getSelectedRow() );
         jDlgUsuarios.beanView(usuarios);
         this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

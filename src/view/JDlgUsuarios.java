@@ -6,7 +6,7 @@
 package view;
 
 import bean.Usuarios;
-import dao.UsuariosDAO;
+import dao.UsuariosDao;
 import tools.Util;
 
 /**
@@ -303,8 +303,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
         if (Util.perguntar("Deseja excluir ?") == true) {
-            UsuariosDAO usuariosDAO = new UsuariosDAO();
-            usuariosDAO.delete( viewBean() );
+            UsuariosDao usuariosDao = new UsuariosDao();
+            usuariosDao.delete( viewBean() );
         }
         Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataDeNascimento, 
                 jPwfSenha, jCboNivel, jChbAtivo);
@@ -313,10 +313,10 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        UsuariosDao usuariosDao = new UsuariosDao();
         Usuarios usuarios = viewBean();
-        usuariosDAO.insert(usuarios);
-        //usuariosDAO.insert( viewBean() );
+        usuariosDao.insert(usuarios);
+        //usuariosDao.insert( viewBean() );
         
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf,
                 jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo,

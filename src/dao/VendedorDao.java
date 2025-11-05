@@ -69,4 +69,6 @@ public class VendedorDao extends AbstractDAO{
         VendedorDao produtosDAO = new VendedorDao();
         produtosDAO.listAll();
     }
+    
+    
 }
