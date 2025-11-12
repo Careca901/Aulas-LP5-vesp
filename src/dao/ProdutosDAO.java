@@ -67,6 +67,4 @@ public class ProdutosDAO extends AbstractDAO{
         ProdutosDAO produtosDAO = new ProdutosDAO();
         produtosDAO.listAll();
     }
-    
-    
 }

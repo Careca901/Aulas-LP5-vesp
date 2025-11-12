@@ -5,7 +5,7 @@
 package view;
 
 import bean.Usuarios;
-import dao.UsuariosDao;
+import dao.UsuariosDAO;
 import java.util.List;
 import tools.Util;
 import view.JDlgUsuarios;
@@ -21,23 +21,23 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
      */
     private JDlgUsuarios jDlgUsuarios;
     ControllerUsuarios controllerUsuarios;
-    
+
     public JDlgUsuariosPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Usuários");
         controllerUsuarios = new ControllerUsuarios();
-        UsuariosDao usuariosDao = new UsuariosDao();
-        List lista = (List) usuariosDao.listAll();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List lista = (List) usuariosDAO.listAll();
         controllerUsuarios.setList(lista);
         jTable1.setModel(controllerUsuarios);
     }
 
-    public void setTelaAnterior( JDlgUsuarios jDlgUsuarios) {
+    public void setTelaAnterior(JDlgUsuarios jDlgUsuarios) {
         this.jDlgUsuarios = jDlgUsuarios;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,19 +105,19 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-        // TODO add your handling code here:
-        if (jTable1.getSelectedRow()== -1){
-            Util.mensagem("Deixa de ser cabeçudo, escolha uma linha e de 2 clicks nela");
-        Usuarios usuarios =  controllerUsuarios.getBean( jTable1.getSelectedRow() );
-        jDlgUsuarios.beanView(usuarios);
-        this.setVisible(false);
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            Usuarios usuarios = controllerUsuarios.getBean(jTable1.getSelectedRow());
+            jDlgUsuarios.beanView(usuarios);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-          if (evt.getClickCount() == 2) {
-              jBtnOkActionPerformed(null);
+        if (evt.getClickCount() == 2) {
+            jBtnOkActionPerformed(null);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 

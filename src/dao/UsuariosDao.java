@@ -16,7 +16,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author u1845853
  */
-public class UsuariosDao extends AbstractDAO{
+public class UsuariosDAO extends AbstractDAO{
 
     @Override
     public void insert(Object object) {
@@ -63,7 +63,7 @@ public class UsuariosDao extends AbstractDAO{
     }
 
     public static void main(String[] args) {
-        UsuariosDao usuariosDAO = new UsuariosDao();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
         usuariosDAO.listAll();
     }
 }

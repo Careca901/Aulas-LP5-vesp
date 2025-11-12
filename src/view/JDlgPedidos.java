@@ -9,7 +9,7 @@ import bean.Clientes;
 import bean.Pedidos;
 import bean.Vendedor;
 import dao.ClientesDAO;
-import dao.VendedorDao;
+import dao.VendedorDAO;
 import java.util.List;
 import tools.Util;
 
@@ -29,23 +29,32 @@ public class JDlgPedidos extends javax.swing.JDialog {
         ClientesDAO clientesDAO = new ClientesDAO();
         List lista = (List) clientesDAO.listAll();
         for (int i = 0; i < lista.size(); i++) {
-            jCboClientes.addItem( (Clientes) lista.get(i));            
+            jCboClientes.addItem((Clientes) lista.get(i));
         }
-        VendedorDao vendedorDao = new VendedorDao();
-        List listaVend = (List)vendedorDao.listAll();
+
+        VendedorDAO vendedorDAO = new VendedorDAO();
+        List listaVend = (List) vendedorDAO.listAll();
         for (Object object : listaVend) {
-            jCboVendedor.addItem(( (Vendedor) object));
+            jCboVendedor.addItem((Vendedor) object);
         }
     }
-    
+
     public Pedidos viewBean() {
         Pedidos pedidos = new Pedidos();
-        pedidos.setIdpedidos( Util.strToInt(jTxtCodigo.getText()));
+        pedidos.setIdpedidos(Util.strToInt(jTxtCodigo.getText()));
         pedidos.setData(Util.strToDate(jFmtData.getText()));
         pedidos.setTotal(Util.strToDouble(jTxtTotal.getText()));
         pedidos.setClientes((Clientes) jCboClientes.getSelectedItem());
         pedidos.setVendedor((Vendedor) jCboVendedor.getSelectedItem());
         return pedidos;
+    }
+
+    public void beanView(Pedidos pedidos) {
+        jTxtCodigo.setText(Util.intToStr(pedidos.getIdpedidos()));
+        jFmtData.setText(Util.dateToStr(pedidos.getData()));
+        jTxtTotal.setText(Util.doubleToStr(pedidos.getTotal()));
+        jCboClientes.setSelectedItem(pedidos.getClientes());
+        jCboVendedor.setSelectedItem(pedidos.getVendedor());
     }
 
     /**
@@ -87,12 +96,6 @@ public class JDlgPedidos extends javax.swing.JDialog {
 
         jLabel3.setText("Clientes");
 
-        jCboVendedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCboVendedorActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Vendedor");
 
         jLabel5.setText("Total");
@@ -108,11 +111,6 @@ public class JDlgPedidos extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
@@ -232,7 +230,7 @@ public class JDlgPedidos extends javax.swing.JDialog {
                                 .addComponent(jBtnPesquisar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jBtnExcluirProd)
                                     .addComponent(jBtnAlterarProd)
@@ -262,19 +260,18 @@ public class JDlgPedidos extends javax.swing.JDialog {
                             .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtnIncluirProd)
-                        .addGap(74, 74, 74)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBtnAlterarProd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnExcluirProd)
-                        .addGap(149, 149, 149))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGap(149, 149, 149)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir)
                     .addComponent(jBtnAlterar)
@@ -357,8 +354,8 @@ public class JDlgPedidos extends javax.swing.JDialog {
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o produto ?")== true) {
-            
+        if (Util.perguntar("Deseja excluir o produto ?") == true) {
+
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
@@ -373,15 +370,6 @@ public class JDlgPedidos extends javax.swing.JDialog {
         JDlgPedidosProdutos jDlgPedidosProdutos = new JDlgPedidosProdutos(null, true);
         jDlgPedidosProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
-
-    private void jCboVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboVendedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCboVendedorActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
