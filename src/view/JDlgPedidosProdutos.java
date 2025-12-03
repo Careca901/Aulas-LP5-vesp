@@ -5,6 +5,7 @@
  */
 package view;
 
+import bean.PedidosProdutos;
 import bean.Produtos;
 import dao.ProdutosDAO;
 import java.util.List;
@@ -15,6 +16,9 @@ import tools.Util;
  * @author u1845853
  */
 public class JDlgPedidosProdutos extends javax.swing.JDialog {
+
+    JDlgPedidos jDlgPedidos;
+    boolean incluir = false;
 
     /**
      * Creates new form JDlgPedidosProdutos
@@ -32,6 +36,17 @@ public class JDlgPedidosProdutos extends javax.swing.JDialog {
         }
         Util.habilitar(false, jTxtValorUni, jTxtTotal);
 
+    }
+
+    public void setTelaAnterior(JDlgPedidos jDlgPedidos, PedidosProdutos pedidosProdutos) {
+        this.jDlgPedidos = jDlgPedidos;
+        if (pedidosProdutos != null) {
+            incluir = false;
+            jCboProdutos.setSelectedItem(pedidosProdutos.getProdutos());
+            jTxtQuantidade.setText(Util.intToStr(pedidosProdutos.getQuantidade()));
+        } else {
+            incluir = true;
+        }
     }
 
     /**
@@ -66,20 +81,9 @@ public class JDlgPedidosProdutos extends javax.swing.JDialog {
 
         jLabel2.setText("Quantidade");
 
-        jTxtQuantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtQuantidadeActionPerformed(evt);
-            }
-        });
         jTxtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTxtQuantidadeKeyReleased(evt);
-            }
-        });
-
-        jTxtValorUni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtValorUniActionPerformed(evt);
             }
         });
 
@@ -168,6 +172,17 @@ public class JDlgPedidosProdutos extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        PedidosProdutos pedidosProdutos = new PedidosProdutos();
+        pedidosProdutos.setProdutos((Produtos) jCboProdutos.getSelectedItem());
+        pedidosProdutos.setQuantidade(Util.strToInt(jTxtQuantidade.getText()));
+        pedidosProdutos.setValorUnitario(Util.strToDouble(jTxtValorUni.getText()));
+        if (incluir == true) {
+            jDlgPedidos.controllerPedProd.addBean(pedidosProdutos);
+        } else{
+        jDlgPedidos.controllerPedProd.removeBean(jDlgPedidos.getjTable1().getSelectedRow());
+        jDlgPedidos.controllerPedProd.addBean(pedidosProdutos);
+        }
+            
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -183,22 +198,13 @@ public class JDlgPedidosProdutos extends javax.swing.JDialog {
         jTxtTotal.setText(Util.doubleToStr(quant * produtos.getValorUnitario()));
     }//GEN-LAST:event_jCboProdutosActionPerformed
 
-    private void jTxtValorUniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtValorUniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtValorUniActionPerformed
-
-    private void jTxtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtQuantidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtQuantidadeActionPerformed
-
     private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
-        // TODO add your handling code here:
-        if (!jTxtQuantidade.getText().isEmpty()) {
+        if (jTxtQuantidade.getText().isEmpty() == false) {
             Produtos produtos = (Produtos) jCboProdutos.getSelectedItem();
             int quant = Util.strToInt(jTxtQuantidade.getText());
             jTxtTotal.setText(Util.doubleToStr(quant * produtos.getValorUnitario()));
         } else {
-            jTxtTotal.setText("0");
+            Util.limpar(jTxtTotal);
         }
     }//GEN-LAST:event_jTxtQuantidadeKeyReleased
 

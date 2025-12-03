@@ -4,7 +4,7 @@
  */
 package view;
 
-import bean.Pedidos;
+import bean.Usuarios;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,21 +13,21 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Marcos
  */
-public class ControllerPedidos extends AbstractTableModel {
+public class ControllerUsuarios extends AbstractTableModel {
 
-    private List lstPedidos;
+    private List lstUsuarios;
 
-    public void setList(List lstPedidos) {
-        this.lstPedidos = lstPedidos;
+    public void setList(List lstUsuarios) {
+        this.lstUsuarios = lstUsuarios;
     }
     
-    public Pedidos getBean(int rowIndex) {
-        return (Pedidos) lstPedidos.get(rowIndex);
+    public Usuarios getBean(int rowIndex) {
+        return (Usuarios) lstUsuarios.get(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return lstPedidos.size();
+        return lstUsuarios.size();
                 
     }
 
@@ -38,17 +38,17 @@ public class ControllerPedidos extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Pedidos pedidos = (Pedidos) lstPedidos.get( rowIndex);
+        Usuarios usuarios = (Usuarios) lstUsuarios.get( rowIndex);
         if ( columnIndex == 0 ){
-            return pedidos.getIdpedidos();
+            return usuarios.getIdusuarios();
         } else if (columnIndex ==1) {
-            return pedidos.getData();        
+            return usuarios.getNome();        
         } else if (columnIndex ==2) {
-            return pedidos.getTotal();
+            return usuarios.getApelido();
         } else if (columnIndex ==3) {
-            return pedidos.getClientes().getNome();
+            return usuarios.getCpf();
         }
-        return ""; 
+        return "";
     }
 
     @Override
@@ -56,11 +56,11 @@ public class ControllerPedidos extends AbstractTableModel {
         if ( columnIndex == 0) {
             return "Código";
         } else if ( columnIndex == 1) {
-            return "Data";         
+            return "Nome";         
         } else if ( columnIndex == 2) {
-            return "Total";
+            return "Apelido";
         } else if ( columnIndex == 3) {
-            return "Cliente";
+            return "Cpf";
         } 
         return "";
     }
