@@ -4,6 +4,7 @@
  */
 package view;
 
+import bean.Produtos;
 import bean.Usuarios;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -13,21 +14,22 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Marcos
  */
-public class ControllerUsuarios extends AbstractTableModel {
+public class ControllerConsultasProdutos extends AbstractTableModel {
 
-    private List lstUsuarios;
+    private List lstProdutos;
 
-    public void setList(List lstUsuarios) {
-        this.lstUsuarios = lstUsuarios;
+    public void setList(List lstProdutos) {
+        this.lstProdutos = lstProdutos;
+        this.fireTableDataChanged();
     }
     
     public Usuarios getBean(int rowIndex) {
-        return (Usuarios) lstUsuarios.get(rowIndex);
+        return (Usuarios) lstProdutos.get(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return lstUsuarios.size();
+        return lstProdutos.size();
                 
     }
 
@@ -38,15 +40,13 @@ public class ControllerUsuarios extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Usuarios usuarios = (Usuarios) lstUsuarios.get( rowIndex);
+        Produtos produtos = (Produtos) lstProdutos.get( rowIndex);
         if ( columnIndex == 0 ){
-            return usuarios.getIdusuarios();
+            return produtos.getIdprodutos();
         } else if (columnIndex ==1) {
-            return usuarios.getNome();        
+            return produtos.getNome();        
         } else if (columnIndex ==2) {
-            return usuarios.getApelido();
-        } else if (columnIndex ==3) {
-            return usuarios.getCpf();
+            return produtos.getValorUnitario();
         }
         return "";
     }
@@ -58,10 +58,9 @@ public class ControllerUsuarios extends AbstractTableModel {
         } else if ( columnIndex == 1) {
             return "Nome";         
         } else if ( columnIndex == 2) {
-            return "Apelido";
-        } else if ( columnIndex == 3) {
-            return "Cpf";
+            return "ValorUnitario";
         } 
         return "";
     }
+    
 }

@@ -39,6 +39,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMnuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMnuConsulta = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +100,9 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenu2.setMnemonic('m');
         jMenu2.setText("Movimento");
         jMenuBar1.add(jMenu2);
+
+        jMnuConsulta.setText("Consultas");
+        jMenuBar1.add(jMnuConsulta);
 
         setJMenuBar(jMenuBar1);
 
@@ -176,6 +180,7 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jMnuCadastros;
+    private javax.swing.JMenu jMnuConsulta;
     private javax.swing.JMenuItem jMnuSair;
     private javax.swing.JMenuItem jMnuUsuarios;
     private javax.swing.JPopupMenu.Separator jSeparator1;

@@ -9,6 +9,7 @@ import bean.PedidosProdutos;
 import bean.Produtos;
 import dao.ProdutosDAO;
 import java.util.List;
+import javax.swing.JTable;
 import tools.Util;
 
 /**
@@ -16,10 +17,8 @@ import tools.Util;
  * @author u1845853
  */
 public class JDlgPedidosProdutos extends javax.swing.JDialog {
-
     JDlgPedidos jDlgPedidos;
-    boolean incluir = false;
-
+    boolean incluir;
     /**
      * Creates new form JDlgPedidosProdutos
      */
@@ -28,22 +27,22 @@ public class JDlgPedidosProdutos extends javax.swing.JDialog {
         initComponents();
         setTitle("Pedidos produtos");
         setLocationRelativeTo(null);
-        jTxtQuantidade.setText("1");
+         jTxtQuantidade.setText("1");
         ProdutosDAO produtosDAO = new ProdutosDAO();
         List lista = (List) produtosDAO.listAll();
         for (Object object : lista) {
             jCboProdutos.addItem((Produtos) object);
         }
         Util.habilitar(false, jTxtValorUni, jTxtTotal);
-
+       
     }
-
+    
     public void setTelaAnterior(JDlgPedidos jDlgPedidos, PedidosProdutos pedidosProdutos) {
         this.jDlgPedidos = jDlgPedidos;
         if (pedidosProdutos != null) {
             incluir = false;
             jCboProdutos.setSelectedItem(pedidosProdutos.getProdutos());
-            jTxtQuantidade.setText(Util.intToStr(pedidosProdutos.getQuantidade()));
+            jTxtQuantidade.setText(Util.intToStr(pedidosProdutos.getQuantidade()));        
         } else {
             incluir = true;
         }
@@ -58,7 +57,7 @@ public class JDlgPedidosProdutos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();//alterei sou o cara
         jCboProdutos = new javax.swing.JComboBox<Produtos>();
         jLabel2 = new javax.swing.JLabel();
         jTxtQuantidade = new javax.swing.JTextField();
@@ -174,15 +173,14 @@ public class JDlgPedidosProdutos extends javax.swing.JDialog {
         // TODO add your handling code here:
         PedidosProdutos pedidosProdutos = new PedidosProdutos();
         pedidosProdutos.setProdutos((Produtos) jCboProdutos.getSelectedItem());
-        pedidosProdutos.setQuantidade(Util.strToInt(jTxtQuantidade.getText()));
-        pedidosProdutos.setValorUnitario(Util.strToDouble(jTxtValorUni.getText()));
+        pedidosProdutos.setQuantidade(Util.strToInt(jTxtQuantidade.getText()) );
+        pedidosProdutos.setValorUnitario(Util.strToDouble(jTxtValorUni.getText()) );                
         if (incluir == true) {
+           jDlgPedidos.controllerPedProd.addBean(pedidosProdutos);
+        } else {
+            jDlgPedidos.controllerPedProd.removeBean(jDlgPedidos.getjTable1().getSelectedRow());
             jDlgPedidos.controllerPedProd.addBean(pedidosProdutos);
-        } else{
-        jDlgPedidos.controllerPedProd.removeBean(jDlgPedidos.getjTable1().getSelectedRow());
-        jDlgPedidos.controllerPedProd.addBean(pedidosProdutos);
         }
-            
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -195,17 +193,17 @@ public class JDlgPedidosProdutos extends javax.swing.JDialog {
         Produtos produtos = (Produtos) jCboProdutos.getSelectedItem();
         jTxtValorUni.setText(Util.doubleToStr(produtos.getValorUnitario()));
         int quant = Util.strToInt(jTxtQuantidade.getText());
-        jTxtTotal.setText(Util.doubleToStr(quant * produtos.getValorUnitario()));
+        jTxtTotal.setText(Util.doubleToStr( quant * produtos.getValorUnitario()));
     }//GEN-LAST:event_jCboProdutosActionPerformed
 
     private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
-        if (jTxtQuantidade.getText().isEmpty() == false) {
-            Produtos produtos = (Produtos) jCboProdutos.getSelectedItem();
-            int quant = Util.strToInt(jTxtQuantidade.getText());
-            jTxtTotal.setText(Util.doubleToStr(quant * produtos.getValorUnitario()));
-        } else {
-            Util.limpar(jTxtTotal);
-        }
+       if(jTxtQuantidade.getText().isEmpty() == false){
+        Produtos produtos = (Produtos) jCboProdutos.getSelectedItem();
+        int quant = Util.strToInt(jTxtQuantidade.getText());
+        jTxtTotal.setText(Util.doubleToStr( quant * produtos.getValorUnitario()));
+       } else {
+           Util.limpar(jTxtTotal);
+       }
     }//GEN-LAST:event_jTxtQuantidadeKeyReleased
 
     /**

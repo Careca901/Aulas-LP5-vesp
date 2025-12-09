@@ -2,6 +2,12 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+
+matheus victor pedro
+mathias maria  - fazendo no projeto deles
+laura furtado
+gabriela anterando trabalho na aula
+
  */
 package view;
 
@@ -50,8 +56,18 @@ public class JDlgPedidos extends javax.swing.JDialog {
         controllerPedProd = new ControllerPedidosProdutos();
         controllerPedProd.setList(new ArrayList());
         jTable1.setModel(controllerPedProd);
+        Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes,
+                jCboVendedor, jTxtTotal,
+                jBtnConfirmar, jBtnCancelar,
+                jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+
     }
 
+    public JTable getjTable1() {
+        return jTable1;
+    }    
+    
     public Pedidos viewBean() {
         Pedidos pedidos = new Pedidos();
         pedidos.setIdpedidos(Util.strToInt(jTxtCodigo.getText()));
@@ -61,9 +77,7 @@ public class JDlgPedidos extends javax.swing.JDialog {
         pedidos.setVendedor((Vendedor) jCboVendedor.getSelectedItem());
         return pedidos;
     }
-    public JTable getjTable1(){
-            return jTable1;
-    }
+
     public void beanView(Pedidos pedidos) {
         jTxtCodigo.setText(Util.intToStr(pedidos.getIdpedidos()));
         jFmtData.setText(Util.dateToStr(pedidos.getData()));
@@ -305,12 +319,12 @@ public class JDlgPedidos extends javax.swing.JDialog {
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-//        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf,
-//            jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo,
-//            jBtnConfirmar, jBtnCancelar);
-//        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-//        Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataDeNascimento,
-//            jPwfSenha, jCboNivel, jChbAtivo);
+        Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes,
+                jCboVendedor, jTxtTotal,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal);
+        controllerPedProd.setList(new ArrayList());
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -318,13 +332,15 @@ public class JDlgPedidos extends javax.swing.JDialog {
         JDlgPedidosPesquisar jDlgPedidosPesquisar = new JDlgPedidosPesquisar(null, true);
         jDlgPedidosPesquisar.setTelaAnterior(this);
         jDlgPedidosPesquisar.setVisible(true);
+
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
         Util.habilitar(true, jTxtCodigo, jFmtData, jCboClientes,
                 jCboVendedor, jTxtTotal,
-                jBtnConfirmar, jBtnCancelar);
+                jBtnConfirmar, jBtnCancelar,
+                jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal);
 
@@ -335,9 +351,9 @@ public class JDlgPedidos extends javax.swing.JDialog {
         // TODO add your handling code here:
         Util.habilitar(true, jTxtCodigo, jFmtData, jCboClientes,
                 jCboVendedor, jTxtTotal,
-                jBtnConfirmar, jBtnCancelar);
+                jBtnConfirmar, jBtnCancelar,
+                jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal);
         incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -346,7 +362,6 @@ public class JDlgPedidos extends javax.swing.JDialog {
         if (Util.perguntar("Deseja excluir ?") == true) {
             PedidosDAO pedidosDAO = new PedidosDAO();
             PedidosProdutosDAO pedidosProdutosDAO = new PedidosProdutosDAO();
-
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
                 PedidosProdutos pedidosProdutos = controllerPedProd.getBean(ind);
                 pedidosProdutosDAO.delete(pedidosProdutos);
@@ -358,7 +373,7 @@ public class JDlgPedidos extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
         PedidosDAO pedidosDAO = new PedidosDAO();
         PedidosProdutosDAO pedidosProdutosDAO = new PedidosProdutosDAO();
         Pedidos pedidos = viewBean();
@@ -371,17 +386,22 @@ public class JDlgPedidos extends javax.swing.JDialog {
             }
         } else {
             pedidosDAO.update(pedidos);
-
+            //excluo todos os pedidos produtos do pedido
+            pedidosProdutosDAO.deleteProdutos(pedidos);
+            //incluo os pedidos produtos
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
                 PedidosProdutos pedidosProdutos = controllerPedProd.getBean(ind);
-                pedidosProdutosDAO.delete(pedidosProdutos);
+                pedidosProdutos.setPedidos(pedidos);
+                pedidosProdutosDAO.insert(pedidosProdutos);
             }
         }
+
         Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes,
                 jCboVendedor, jTxtTotal,
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jFmtData, jCboClientes, jCboVendedor, jTxtTotal);
+        controllerPedProd.setList(new ArrayList());
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed

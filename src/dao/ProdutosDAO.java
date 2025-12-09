@@ -11,19 +11,17 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-
-
 /**
  *
  * @author u1845853
  */
-public class ProdutosDAO extends AbstractDAO{
+public class ProdutosDAO extends AbstractDAO {
 
     @Override
     public void insert(Object object) {
         session.beginTransaction();
         session.save(object);
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
     }
 
     @Override
@@ -32,25 +30,55 @@ public class ProdutosDAO extends AbstractDAO{
         session.flush();
         session.clear();
         session.update(object);
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
         session.beginTransaction();
         session.flush();
-        session.clear();        
+        session.clear();
         session.delete(object);
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
     }
 
     @Override
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Produtos.class);
-        criteria.add(Restrictions.eq("idprodutos", codigo));
+        criteria.add(Restrictions.like("idproduto", codigo));
         List lista = criteria.list();
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Produtos.class);
+        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listValor(double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Produtos.class);
+        criteria.add(Restrictions.like("valoUnitaio", valor
+        ));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listNomeValor(String nome, double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Produtos.class);
+        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("valoUnitaio", valor));
+
+        List lista = criteria.list();
+        session.getTransaction().commit();
         return lista;
     }
 
@@ -59,8 +87,8 @@ public class ProdutosDAO extends AbstractDAO{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Produtos.class);
         List lista = criteria.list();
-        session.getTransaction().commit();        
-        return lista;    
+        session.getTransaction().commit();
+        return lista;
     }
 
     public static void main(String[] args) {
